@@ -21,7 +21,7 @@
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itassignpro?useSSL=false&amp;serverTimezone=UTC" />
             <property name="jakarta.persistence.jdbc.user" value="root" />
-            <property name="jakarta.persistence.jdbc.password" value="AdaMouad2004" />
+            <property name="jakarta.persistence.jdbc.password" value="root" />
 
             <!-- Propriétés spécifiques à EclipseLink -->
             <!-- Niveau de log pour aider lors du développement -->
