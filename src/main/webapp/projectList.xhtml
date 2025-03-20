@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
+    <title>Liste des Projets - ITAssignPro</title>
+    <!-- Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+           />
+    <!-- Bootstrap JS via CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+           ></script>
+</h:head>
+<h:body>
+    <!-- Inclusion du Header -->
+    <ui:include src="/templates/header.xhtml" />
+
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">Liste des Projets</h1>
+
+        <!-- Tableau des projets -->
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Budget</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Itération sur la liste des projets -->
+                <ui:repeat value="#{projectController.projects}" var="proj">
+                    <tr>
+                        <td>#{proj.id}</td>
+                        <td>#{proj.name}</td>
+                        <td>#{proj.budget}</td>
+                        <td>
+                            <!-- Bouton pour modifier : ouvre une modal ou prépare l'édition -->
+                            <h:commandButton value="Modifier" action="#{projectController.prepareEdit(proj)}"
+                                             styleClass="btn btn-sm btn-warning"
+                                             data-bs-toggle="modal" data-bs-target="#editProjectModal" />
+                            <!-- Bouton pour supprimer -->
+                            <h:form style="display:inline;">
+                                <h:commandLink action="#{projectController.deleteProject(proj.id)}"
+                                               styleClass="btn btn-sm btn-danger" value="Supprimer"
+                                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');">
+                                    <f:ajax render="@form"/>
+                                </h:commandLink>
+                            </h:form>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Formulaire d'ajout d'un nouveau projet -->
+        <div class="my-5">
+            <h2 class="text-center">Ajouter un nouveau projet</h2>
+            <h:form id="addProjectForm">
+                <div class="mb-3">
+                    <h:outputLabel for="projName" value="Nom du projet :" class="form-label"/>
+                    <h:inputText id="projName" value="#{projectController.project.name}" styleClass="form-control" required="true"/>
+                </div>
+                <div class="mb-3">
+                    <h:outputLabel for="budget" value="Budget :" class="form-label"/>
+                    <h:inputText id="budget" value="#{projectController.project.budget}" styleClass="form-control" required="true"/>
+                </div>
+                <div class="text-center">
+                    <h:commandButton value="Ajouter" action="#{projectController.createProject}" styleClass="btn btn-primary"/>
+                </div>
+                <h:messages globalOnly="true" styleClass="alert alert-info mt-3"/>
+            </h:form>
+        </div>
+    </div>
+
+    <!-- Modal d'édition d'un projet -->
+    <div class="modal fade" id="editProjectModal" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h:form id="editProjectForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProjectModalLabel">Modifier le projet</h5>
+                        <button type="button" class="btn-close" ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <h:outputLabel for="editProjName" value="Nom du projet :" class="form-label"/>
+                            <h:inputText id="editProjName" value="#{projectController.project.name}" styleClass="form-control" required="true"/>
+                        </div>
+                        <div class="mb-3">
+                            <h:outputLabel for="editBudget" value="Budget :" class="form-label"/>
+                            <h:inputText id="editBudget" value="#{projectController.project.budget}" styleClass="form-control" required="true"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" >Annuler</button>
+                        <h:commandButton value="Enregistrer" action="#{projectController.updateProject}" styleClass="btn btn-primary"/>
+                    </div>
+                    <h:messages globalOnly="true" styleClass="alert alert-info mt-3"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclusion du Footer -->
+    <ui:include src="/templates/footer.xhtml" />
+</h:body>
+</html>

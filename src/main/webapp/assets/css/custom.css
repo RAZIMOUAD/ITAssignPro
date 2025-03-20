@@ -1,0 +1,78 @@
+/* custom.css */
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typographie artistique pour les titres */
+h1, h2, h3, .navbar-brand {
+    font-family: 'Garamond', serif;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+p {
+    line-height: 1.6;
+    color: #333;
+}
+.container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.table-hover tbody tr:hover {
+    background-color: #f2f2f2; /* Gris clair */
+}
+.badge.bg-info.text-dark {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+}
+
+/* Effet de survol sur les liens du header */
+.nav-link:hover {
+    color: #ffd700 !important; /* Doré pour un effet élégant */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+/* Style pour le footer */
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Optionnel: animation douce sur le chargement du header */
+header {
+    animation: fadeInDown 1s ease-out;
+}
+
+.jumbotron {
+    animation: fadeInUp 1s ease-out;
+    border-radius: 10px;
+    padding: 2rem;
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.jumbotron {
+    animation: fadeInUp 1s ease-out;
+}
